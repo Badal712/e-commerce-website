@@ -1,0 +1,65 @@
+<%@ page language="java" contentType="text/html" import="java.sql.*" %>
+<%!
+	Statement stmt;
+	Connection conn;
+	ResultSet rsRegdNo;
+	String regdNo, supName, suppID, dt, local, ct, phNo, mid, gstNo, sl, proC, proName, cat, pri, qun, amo;
+
+	public void doConnect(){
+		
+		try{
+			Class.forName("com.sql.jdbc.Driver");
+		}
+		catch(ClassNotFoundException cnfe){
+			System.out.println("Unable to load driver "+cnfe);
+		}		
+		
+		try{
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ospdb","root","root");
+		}
+		catch(SQLException se){
+			System.out.println("Unabel to connect"+se);
+		}
+	}	
+%>
+<html>
+	<head>
+		<title>	 Data save</title>
+	</head>
+	<body>
+		<%
+			regdNo = request.getParameter("txtRegdNo");
+			supName = request.getParameter("cmbSupName");
+			suppID = request.getParameter("txtSupID");
+			dt = request.getParameter("dtDate");
+			local = request.getParameter("txtlocal");
+			ct = request.getParameter("txtCT");
+			phNo = request.getParameter("txtPhNo");
+			mid = request.getParameter("txtmid");
+			gstNo = request.getParameter("txtGSTN");
+			sl = request.getParameter("txtslNo");
+			proC = request.getParameter("cmbProC");
+			proName = request.getParameter("txtProname");
+			cat = request.getParameter("txtCat");
+			pri = request.getParameter("txtPri");
+			qun = request.getParameter("txtQun");
+			amo = request.getParameter("txtAmo");
+			doConnect();
+			
+			try{
+				stmt = conn.createStatement();
+				stmt.executeUpdate("insert into osp_tblsuppreg value('"+regdNo+"','"+supName+"','"+dt+"','"+local+"','"+suppID+"','"+phNo+"','"+ct+"','"+gstNo+"','"+mid+"','"+sl+"','"+proC+"','"+proName+"','"+cat+"','"+pri+"','"+qun+"','"+amo+"')");
+				
+				//Code for show alert
+					
+				out.println("<script type='text/javaScript'>");
+				out.println("alert("+"'Your data Saved Successfully...'"+");\n");
+				out.println("setTimeout(function(){window.location.href='OSP_SuppRegc.jsp'},10);");
+				out.println("</script>\n");
+			}
+			catch(SQLException sqle){
+				out.println("Unable to save your data "+sqle);
+			}
+		%>
+	</body>
+</html>

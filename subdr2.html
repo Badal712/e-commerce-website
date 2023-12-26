@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+}
+body {
+    min-height: 100vh;
+    background-image: linear-gradient(to bottom right, rgb(255, 210, 210),  rgb(0, 132, 255));
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+
+header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding:10px;
+    position: fixed;
+    top:0;
+    right:-20;
+    width:100%
+}
+.logo-container{
+    display:flex;
+    align-items: center;
+}
+.logo{
+    margin-right: 20px;
+}
+.logo > .logoimg{
+    width:50px;
+}
+.logo > .logoname{ 
+    width:100px;
+}
+.heading{
+    text-align: center;
+    flex-grow: 1;
+    width:50%;
+    max-width:1000px;
+}
+.nav-tabs ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}
+.nav-tabs a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding:18px 15px;
+    transition: all 0.6s;
+}
+.nav-tabs a:hover {
+    background-color: rgb(11, 76, 136);
+    color:beige
+}
+.top_bar{
+    position:relative;
+    top:55px;
+    left:350px
+}
+.sidebar{
+    position:absolute;
+    top:0px;
+    height:100%;
+    width: 260;
+    background:#11101d;
+    margin-top: 55px;
+    padding: 15px;
+}
+
+iframe{
+    margin: 0 ;
+    padding: 0;
+    border: none;
+    width:265px;
+    height:600px;
+    background-color:#11101d;
+    align:left;
+    
+}
+.sidebar a {
+    color:#fff;
+    text-decoration: none;
+    text-align: center;
+}
+.sidebar .logo{
+    font-size: 25px;
+    padding: 0 34px;
+}
+.menu-Content{
+    position: relative;
+    height:100%;
+    margin-top: 40px;
+}
+.sidebar .sub_menu{
+    background-color: #11101d;
+    color:rgb(235, 232, 232);
+    padding:12px 105px;
+    font-size: 15px;
+    font-weight: 100;
+}
+.menu_tabs{
+    margin-top: 50px;
+    padding-left: 270px;
+    width:100%;
+    background-color: #11101d;
+    display: flex;
+    gap: 10px;
+}
+.menu_tabs li{
+    list-style-type: none;
+    display: inline-flex;
+    flex-direction: row;
+    border-radius: 10px;
+    transition: 0.5s;
+    color:#f0f0f0;
+    font-size: 18px;
+    font-weight:bold;
+    cursor: pointer;
+    padding: 15px 20px;
+}
+.menu_tabs li:hover{
+    color:#8392cf
+}
+.menu_tabs a{
+    text-decoration: none;
+    color:#f0f0f0;
+    font-size: 18px;
+    font-weight:bold;
+    padding: 15px 20px;
+}
+.menu_tabs a:hover{
+    color:#8392cf
+}
+.Contener > .Img-slider{
+    position:relative;
+    top:150px;
+    left:650px;
+    display: flex;
+    justify-content: center;
+    width:800px;
+    
+}
+.slider{
+    width: 1200px;
+    height: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.sidebar a{
+    color:#637ce0;
+    font-size: 40px;
+    font-weight: bolder;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+}
+.slides{
+    width: 500%;
+    height: 500px;
+    display: flex;
+}
+.slides input{
+    display: none;
+}
+.slide{
+    width: 20%;
+    transition: 2s;
+}
+.slide img{
+    width: 800px;
+    height: 500px;
+}
+
+.navigation-manual{
+    position: relative;
+    width: 800px;
+    margin-top: -40px;
+    display: flex;
+    justify-content: center;
+}
+.manual-btn{
+    border: 2px solid #40D3DC;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 1s;
+}
+.manual-btn:not(:last-child){
+    margin-right: 40px;
+}
+
+.manual-btn:hover{
+    background: #40D3DC;
+}
+
+#radio1:checked ~ .first{
+    margin-left: 0;
+}
+
+#radio2:checked ~ .first{
+    margin-left: -20%;
+}
+
+#radio3:checked ~ .first{
+    margin-left: -40%;
+}
+
+#radio4:checked ~ .first{
+    margin-left: -60%;
+}
+#radio5:checked ~ .first{
+    margin-left: -80%;
+}
+
+.navigation-auto{
+    position: absolute;
+    display: flex;
+    width: 800px;
+    justify-content: center;
+    margin-top: 460px;
+}
+
+.navigation-auto div{
+    border: 2px solid #405fdc;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+.navigation-auto div:not(:last-child){
+    margin-right: 40px;
+}
+
+#radio1:checked ~ .navigation-auto .auto-btn1{
+    background: #40D3DC;
+}
+
+#radio2:checked ~ .navigation-auto .auto-btn2{
+    background: #40D3DC;
+}
+
+#radio3:checked ~ .navigation-auto .auto-btn3{
+    background: #40D3DC;;
+}
+
+#radio4:checked ~ .navigation-auto .auto-btn4{
+    background: #40D3DC;
+}
+#radio5:checked ~ .navigation-auto .auto-btn5{
+    background: #40D3DC;
+}
+/* Style footer */
+.footer-distributed{
+    position: relative;
+    background: #181616;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    width: 100%;
+    text-align: left;
+    font: bold 16px sans-serif;
+    padding: 55px 50px;
+    margin-top: 111px;
+}
+
+.footer-distributed .footer-left,
+.footer-distributed .footer-center,
+.footer-distributed .footer-right{
+    display: inline-block;
+    vertical-align: top;
+}
+
+  /* Footer left */
+
+.footer-distributed .footer-left{
+    width: 40%;
+}
+
+.footer-distributed img{
+    width:50px;
+}
+
+.footer-distributed h3 span{
+    color:  lightseagreen;
+}
+  /* Footer links */
+
+.footer-distributed .footer-links{
+    color:  #ffffff;
+    margin: 20px 0 12px;
+    padding: 0;
+}
+
+.footer-distributed .footer-links a{
+    display:inline-block;
+    line-height: 1.8;
+    font-weight:400;
+    text-decoration: none;
+    color:  inherit;
+}
+.footer-distributed .footer-company-name{
+    color:  #868585;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0;
+}
+  /* Footer Center */
+.footer-distributed .footer-center{
+    width: 35%;
+}
+.footer-distributed .footer-center i{
+    background-color:  #33383b;
+    color: #ffffff;
+    font-size: 25px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 42px;
+    margin: 10px 15px;
+    vertical-align: middle;
+}
+.footer-distributed .footer-center i.fa-envelope{
+    font-size: 17px;
+    line-height: 38px;
+}
+.footer-distributed .footer-center p{
+    display: inline-block;
+    color: #ffffff;
+    font-weight:400;
+    vertical-align: middle;
+    margin:0;
+}
+.footer-distributed .footer-center p span{
+    display:block;
+    font-weight: normal;
+    font-size:14px;
+    line-height:2;
+}
+.footer-distributed .footer-center p a{
+    color:  lightseagreen;
+    text-decoration: none;;
+}
+.footer-distributed .footer-links a:before {
+    content: "|";
+    font-weight:300;
+    font-size: 20px;
+    left: 0;
+    color: #fff;
+    display: inline-block;
+    padding-right: 5px;
+}
+.footer-distributed .footer-links .link-1:before {
+    content: none;
+}
+
+  /* Footer Right */
+.footer-distributed .footer-right{
+    width: 20%;
+}
+.footer-distributed .footer-company-about{
+    line-height: 20px;
+    color:  #92999f;
+    font-size: 13px;
+    font-weight: normal;
+    margin: 0;
+}
+.footer-distributed .footer-company-about span{
+    display: block;
+    color:  #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+footer-distributed .footer-icons{
+    margin-top: 25px;
+}
+.footer-distributed .footer-icons a{
+    display: inline-block;
+    margin:10px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-color:  #181616;
+    border-radius: 2px;
+    font-size: 20px;
+    color: #c9c2c2;
+    text-align: center;
+    line-height: 35px;
+    margin-right: 3px;
+    margin-bottom: 5px;
+}
+.footer-distributed .footer-right .social{
+    width:30px;
+    margin:1px;
+}
+    </style>
+</head>
+<body>
+    <div class="menu_bar">
+        <ul>
+            <li>
+                <a href="#">Product Information Report <i class="fas fa-caret-down"></i></a>
+                <div class="dropdown_menu">
+					<ul>
+						<li><a href="OSP_ReportProductCatgc.jsp" target="_blank">Category</a></li>
+						<li><a href="OSP_ReportProductSuppc.jsp" target="_blank">Supplier Name</a></li>
+					</ul>
+				</div>
+            </li>
+            <li><a href="#">Supplier / Company Requisition Report <i class="fas fa-caret-down"></i></a></li>
+            <li><a href="#">Retailer Requisition Report <i class="fas fa-caret-down"></i></a></li>
+            <li><a href="#">Issue to Retailer Report <i class="fas fa-caret-down"></i></a></li>
+            <li><a href="#">Customer Order Report <i class="fas fa-caret-down"></i></a></li>
+        </ul>
+    </div>
+</body>
+</html>

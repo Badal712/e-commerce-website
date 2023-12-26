@@ -1,0 +1,370 @@
+<%@ page language="java" contentType="text/html" import="java.sql.*" %>
+<%!
+	Connection conn;
+	Statement stmtArray, stmtproC, stmt;
+	ResultSet rsArray, rsproC, rs;
+	String mob[], pass[], na[], loc[], ct[], cn[], mid[];
+	String proC, proN[], cat[], pri[];
+	int i, on;
+	
+	
+	public void doConnect(){
+		
+		try{
+			Class.forName ("com.mysql.jdbc.Driver");
+		}
+		catch(ClassNotFoundException cnfe){
+			System.out.println("Unable to load Driver "+cnfe);
+		}
+		
+		try{
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ospdb","root","root");
+		}
+		catch(SQLException se){
+			System.out.println("Unable to connect "+se);
+		}
+	}
+%>
+<%
+	mob = new String[20];
+	pass = new String[20];
+	na = new String[20];
+	loc = new String[20];
+	ct = new String[20];
+	cn = new String[20];
+	mid = new String[20];
+	doConnect();
+	
+	try{
+		stmtArray = conn.createStatement();
+		rsArray = stmtArray.executeQuery("select * from osp_tblcustorder");
+		i = 0;
+		
+		while(rsArray.next()){
+			mob[i] = rsArray.getString("Mobile_Number");
+			pass[i] = rsArray.getString("Password");
+			na[i] = rsArray.getString("Name");
+			loc[i] = rsArray.getString("Locality");
+			ct[i] = rsArray.getString("City");
+			cn[i] = rsArray.getString("Contant_Number");
+			mid[i] = rsArray.getString("E_Mail");
+			i++;
+		}
+	}
+	catch(SQLException se){
+		out.println("Unable to collect "+se);
+	}
+%>
+<%
+	doConnect();
+	try{
+		stmt = conn.createStatement();
+		rs = stmt.executeQuery("select * from osp_tblcustorder");
+		if(rs.last()){
+			on = rs.getRow();
+		}
+		else{
+			on = 0;
+		}
+		on = on+1;
+	}
+	catch(SQLException se){
+		System.out.println("Unable to show "+se);
+	}
+%>
+<%
+	proN = new String[50];
+	cat = new String[50];
+	pri = new String[50];
+	doConnect();
+	
+	try{
+		stmtArray = conn.createStatement();
+		rsArray = stmtArray.executeQuery("select * from osp_tblproduct");
+		i = 0;
+		
+		while(rsArray.next()){
+			proN[i] = rsArray.getString("Product_Name");
+			cat[i] = rsArray.getString("Product_Category");
+			pri[i] = rsArray.getString("MRP");
+			i++;
+		}
+	}
+	catch(SQLException se){
+		out.println("Unable to collect"+ se);
+	}
+%>
+<html>
+	<head>
+		<title>Customer Order</title>
+		<link rel="stylesheet" href="style.css">
+		<script language="javascript">
+			function goFind(){
+				window.location = "OSP_CustOrderfc.jsp";
+			}
+		</script>
+		<script language="javascript">
+			function showCust(){
+				var jmob, jpass, jna, jloc, jct, jcn, jmid;
+				var mobN, pass;
+				var i, j;
+				
+				jmob = new Array();
+				jpass = new Array();
+				jna = new Array();
+				jloc = new Array();
+				jct = new Array();
+				jcn = new Array();
+				jmid = new Array();
+				j = 0;
+				
+				<%
+					i = 0;
+					while(i < mob.length){
+				%>
+						jmob[j] = "<%=mob[i]%>";
+						jpass[j] = "<%=pass[i]%>";
+						jna[j] = "<%=na[i]%>";
+						jloc[j] = "<%=loc[i]%>";
+						jct[j] = "<%=ct[i]%>";
+						jcn[j] = "<%=cn[i]%>";
+						jmid[j] = "<%=mid[i]%>";
+						j++;
+				<%
+						i++;
+					}
+				%>
+				mobN = document.f1.txtMobN.value;
+				pass = document.f1.txtPass.value;
+				j = 0;
+				flag = 0;
+				while(j < jct.length){
+					if(jmob[j].localeCompare(mobN)==0 && jpass[j].localeCompare(pass)==0){
+						
+						k=j;
+						document.f1.txtName.value = jna[k];
+						document.f1.txtLocal.value = jloc[k];
+						document.f1.txtCt.value = jct[k];
+						document.f1.txtConNum.value = jcn[k];
+						document.f1.txtMid.value = jmid[k];
+						flag = 1;
+						break;
+					}
+					j++;
+				}
+				if(flag==0){
+					alert("Please enter valid Retailer ID and Password");
+				}
+			}
+			function showTotal(){
+				var jproN, jcat, jpri;
+				var i, j;
+				
+				jproN = new Array();
+				jcat = new Array();
+				jpri = new Array();
+				j = 0;
+				<%
+					i=0;
+					while(i < proN.length){
+				%>
+
+						jproN[j] = "<%=proN[i]%>";
+						jcat[j] = "<%=cat[i]%>";
+						jpri[j] = "<%=pri[i]%>";
+						j++;
+				<%
+						i++;
+					}
+				%>
+				k = document.f1.cmbProC.selectedIndex;
+				document.f1.txtProN.value = jproN[k-1];
+				document.f1.txtCat.value = jcat[k-1];
+				document.f1.txtPri.value = jpri[k-1];
+			}
+			
+			function totalAmount(){
+				var amo, qun, total;
+				
+				amo = parseInt(document.f1.txtPri.value);
+				qun = parseInt(document.f1.txtOrdQ.value);
+				total = amo*qun;
+				
+				document.f1.txtAmo.value = total;
+			}
+		</script>
+	</head>
+	<body>
+		<section class="Contener">
+			<header>
+				<div class="logo-container">
+					<div class="logo">
+						<img src="OSS Logo cart.png" class="logo logoimg" alt="One Stop Shop Logo cart image">
+					</div>
+					<div class="logo">
+						<img src="OSS Logo name.png" class="logo logoname" alt="One Stop Shop name">
+					</div>
+				</div>
+				<div class="Heading">
+					<h1>Online Shopping Portal</h1>
+				</div>
+				<nav class="nav-tabs">
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Login</a></li>
+						<li><a href="#">Signup</a></li>
+					</ul>
+				</nav>
+			</header>
+			<form name="f1" action="OSP_CustOrders.jsp" method="post">
+				<h2>Customer Order</h2>
+				<div class="Main">
+					<div class="box">
+						<div class="row">
+							<div class="input_box">
+								<label class="lbl">Order Number :</label>
+								<input type="text" name="txtOrdN" class="tbox" value="<%=on%>" readonly>
+							</div>
+							<div class="input_box">
+								<label class="lbl">Date :<font color="red">*</font></label>
+								<input type="date" class="tbox" name="dtDate" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input_box">
+								<label class="lbl">Mobile Number :<font color="red">*</font></label>
+								<input type="tel" class="tbox" name="txtMobN" required>
+							</div>
+							<div class="input_box">
+								<label class="lbl">Password :</label>
+								<input type="password" class="tbox" name="txtPass" required>
+							</div>
+							<div class="input_box">
+								<input type="button" class="btn" name="btnShow" value="Show" onclick="showCust()">
+							</div>
+						</div>
+						<div class="row">
+							<div class="input_box">
+								<label class="lbl">Name :<font color="red">*</font></label>
+								<input type="text" class="tbox" name="txtName" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input_box">
+								<label class="lbl">Locality :</label>
+								<input type="text" class="tbox" name="txtLocal">
+							</div>
+							<div class="input_box">
+								<label class="lbl">City :</label>
+								<input type="text" class="tbox" name="txtCt">
+							</div>
+						</div>
+						<div class="row">
+							<div class="input_box">
+								<label class="lbl">Contact Number :</label>
+								<input type="text" class="tbox" name="txtConNum">
+							</div>
+							<div class="input_box">
+								<label class="lbl">E-Mail :<font color="red">*</font></label>
+								<input type="text" class="tbox" name="txtMid" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input_box">
+								<label class="lbl">Sl No.</label>
+								<input type="text" class="tbox" name="txtSln">
+							</div>
+							<div class="input_box">
+								<label class="lbl">Product Code</label>
+								<select class="tbox" name="cmbProC" onchange="showTotal()">
+									<option value="">--select--</option>
+									<%
+										doConnect();
+										try{
+											stmtproC = conn.createStatement();
+											rsproC = stmtproC.executeQuery("select * from osp_tblproduct");
+											while(rsproC.next()){
+												proC = rsproC.getString("Product_Code");
+									%>
+									<option value="<%=proC%>"><%=proC%></option>
+									<%
+											}
+										}
+										catch(SQLException se){
+											out.println("Unable to show "+se);
+										}
+									%>
+								</select>
+							</div>
+							<div class="input_box">
+								<label class="lbl">Product Name</label>
+								<input type="text" class="tbox" name="txtProN">
+							</div>
+							<div class="input_box">
+								<label class="lbl">Category</label>
+								<input type="text" class="tbox" name="txtCat">
+							</div>
+							<div class="input_box">
+								<label class="lbl">Price</label>
+								<input type="text" class="tbox" name="txtPri">
+							</div>
+							<div class="input_box">
+								<label class="lbl">Order Quantity</label>
+								<input type="text" class="tbox" name="txtOrdQ" onblur="totalAmount()">
+							</div>
+							<div class="input_box">
+								<label class="lbl">Amount</label>
+								<input type="text" class="tbox" name="txtAmo">
+							</div>
+						</div>
+						<input type="submit" class="btn" name="btnSub" value="Submit">
+						<input type="Button" class="btn" name="btnFind" value="Find" onclick="goFind()">
+						<input type="Reset" class= "btn" name="btnRes" value="Reset">
+					</div>
+				</div>
+			</form>
+			</form>
+		</section>
+		<footer class="footer-distributed">
+			<div class="footer-left">
+				<img src="OSS Logo cart.png" class="logo logoimg" alt="One Stop Shop Logo cart image">
+				<p class="footer-links">
+					<a href="#" class="link-1">Home</a>
+					<a href="#">Blog</a>
+					<a href="#">Pricing</a>
+					<a href="#">About</a>
+					<a href="#">Faq</a>
+					<a href="#">Contact</a>
+				</p>
+				<p class="footer-company-name">&copy; One Stop Shop Mega Mart - 2023</p>
+			</div>
+			<div class="footer-center">
+				<div>
+					<i class="fa fa-map-marker"></i>
+					<p><span>Nayabazar</span> Cuttack, Odisha</p>
+				</div>
+				<div>
+					<i class="phone"></i>
+					<p>7978295957</p>
+				</div>
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:od.badal07@gmail.com">od.badal07@gmail.com</a></p>
+				</div>
+			</div>
+			<div class="footer-right">
+				<p class="footer-company-about">
+					<span>About the company</span>
+					Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+				</p>
+				<div class="footer-icons">
+					<a href="https://www.facebook.com/profile.php?id=100005385408616&sk=about"><i class="fa fa-facebook"><img src="facebook.png" class="social"></i></a>
+					<a href="https://twitter.com/BadalSa38607542?t=6GjO6uAHJ89G4bLhRTmCQw&s=08"><i class="fa fa-twitter"><img src="twitter.png" class="social"></i></a>
+					<a href="https://www.linkedin.com/in/badal-sahoo-056b90220"><i class="fa fa-linkedin"><img src="linkedin.png" class="social"></i></a>
+					<a href="https://github.com/Badal712"><i class="fa fa-github"><img src="github.png" class="social"></i></a>
+
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

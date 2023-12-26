@@ -1,0 +1,73 @@
+<%@ page language="java" contentType="text/html" import="java.sql.*" %>
+<%!
+	Connection conn;
+	Statement stmtUp, stmtDel;
+	String supID, supName, conPer, local, ct, st, phNo, mid, gstN, gstD, btnUp, btnDel;
+	
+	public void doConnect(){
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(ClassNotFoundException cnfe){
+			System.out.println("Unable to load driver "+cnfe);
+		}
+		
+		try{
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ospdb","root","root");
+		}
+		catch(SQLException se){
+			System.out.println("Unable to connect "+se);
+		}
+	}
+%>
+<html>
+	<head>
+		<title>Update Page</title>
+		
+	</head>
+	<body>
+		<%
+			supID = request.getParameter("cmbSupId");
+			supName = request.getParameter("txtsupName");
+			conPer = request.getParameter("txtConPer");
+			local = request.getParameter("txtlocal");
+			ct = request.getParameter("txtCT");
+			st = request.getParameter("txtST");
+			phNo = request.getParameter("txtphNo");
+			mid = request.getParameter("txtmid");
+			gstN = request.getParameter("txtgstN");
+			gstD = request.getParameter("txtgstD");
+			btnUp = request.getParameter("btnUpd");
+			btnDel = request.getParameter("btnDel");
+			doConnect();
+			
+			try{
+				if(btnUp != null){
+					stmtUp = conn.createStatement();
+					stmtUp.executeUpdate("update tblsup set Supplier_Name = '"+supName+"', Contact_Person = '"+conPer+"', Locality = '"+local+"', City = '"+ct+"', State = '"+st+"', Phone_Number = '"+phNo+"', e_Mail = '"+mid+"', GST_Number = '"+gstN+"', GST_Date = '"+gstD+"' where Supplier_ID = '"+supID+"'");
+					
+					//Code for show alert after data updated form database
+				
+					out.println("<script type='text/javaScript'>");
+					out.println("alert("+"'Your Data Update Successfully...'"+");\n");
+					out.println("setTimeout(function(){window.location.href='OSP_Supplierfc.jsp'},10);");
+					out.println("</script>\n");
+				}
+				else if(btnDel != null){
+					stmtDel = conn.createStatement();
+					stmtDel.executeUpdate("delete from tblsup where Supplier_ID = '"+supID+"'");
+					
+					//Code for show alert after data updated form database
+				
+					out.println("<script type='text/javaScript'>");
+					out.println("alert("+"'Your Data Deleted Successfully...'"+");\n");
+					out.println("setTimeout(function(){window.location.href='OSP_Orgfc.jsp'},10);");
+					out.println("</script>\n");
+				}
+			}
+			catch(SQLException sqle){
+				out.println("Unable to process "+sqle);
+			}	
+		%>
+	</body>
+</html>

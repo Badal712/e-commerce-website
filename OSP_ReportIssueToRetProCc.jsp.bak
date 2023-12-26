@@ -1,0 +1,135 @@
+<%@ page language="java" contentType="text/html" import="java.sql.*" %>
+<%!
+	Connection conn;
+	Statement stmt, stmtArray;
+	ResultSet rsArray, rs;
+	String  proC;
+	int i;
+	
+	public void doConnect(){
+	
+		//Connecting to driver
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(ClassNotFoundException cnfe){
+			System.out.println("Unable to load Driver "+cnfe);
+		}
+		
+		//Connecting to database
+		try{
+			conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/ospdb","root","root");
+		}
+		catch(SQLException se){
+			System.out.println("Unable to Connect "+se);
+		}
+	}
+%>
+<html>
+	<head>
+		<title>Online Shopping Portal</title>
+		<link rel="stylesheet" href="mystyle.css">
+	</head>
+	<body>
+		<section class="Contener">
+			<header>
+				<div class="logo-container">
+					<div class="logo">
+						<img src="OSS Logo cart.png" class="logo logoimg" alt="One Stop Shop Logo cart image">
+					</div>
+					<div class="logo">
+						<img src="OSS Logo name.png" class="logo logoname" alt="One Stop Shop name">
+					</div>
+				</div>
+				<div class="Heading">
+					<h1>Online Shopping Portal</h1>
+				</div>
+				<nav class="nav-tabs">
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Login</a></li>
+						<li><a href="#">Signup</a></li>
+					</ul>
+				</nav>
+			</header>
+			<form name="f1" action="OSP_ReportIssueToRetProCS.jsp" method="post">
+			
+				<h2>Issue to Retailer [Product_Cord]</h2>
+				<div class="Main">
+					<div class="box">
+						<div class="input_box">
+							<label class="lbl">Product Code :</label>
+							<select name="cmbproC" class="tbox">
+								<option value="">--select--</option>
+								<%
+									doConnect();
+									try{
+										stmt = conn.createStatement();
+										rs = stmt.executeQuery("select * from osp_tblproduct");
+										
+										while(rs.next()){
+											proC = rs.getString("Product_Code");
+									
+								%>
+								<option value="<%=proC%>"><%=proC%></option>
+								<%
+										}
+									}
+									catch(SQLException se){
+										out.println("Unable to create"+se);
+									}
+								%>
+							</select>
+						</div>
+						<input type="Submit" name="btnShow" class="btn" value="Show">
+						<input type="reset" name="btnRes" class="btn" value="Reset">
+					</div>
+				</div>
+			</form>
+		</section>
+		<footer class="footer-distributed">
+			<div class="footer-left">
+				<img src="OSS Logo cart.png" class="logo logoimg" alt="One Stop Shop Logo cart image">
+				<p class="footer-links">
+					<a href="#" class="link-1">Home</a>
+					<a href="#">Blog</a>
+					<a href="#">Pricing</a>
+					<a href="#">About</a>
+					<a href="#">Faq</a>
+					<a href="#">Contact</a>
+				</p>
+				
+				<p class="footer-company-name">&copy; One Stop Shop Mega Mart - 2023</p>
+			</div>
+			<div class="footer-center">
+				<div>
+					<i class="fa fa-map-marker"></i>
+					<p><span>Nayabazar</span> Cuttack, Odisha</p>
+				</div>
+
+				<div>
+					<i class="phone"></i>
+					<p>7978295957</p>
+				</div>
+
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:od.badal07@gmail.com">od.badal07@gmail.com</a></p>
+				</div>
+			</div>
+			<div class="footer-right">
+				<p class="footer-company-about">
+					<span>About the company</span>
+					Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+				</p>
+				<div class="footer-icons">
+					<a href="https://www.facebook.com/profile.php?id=100005385408616&sk=about"><i class="fa fa-facebook"><img src="facebook.png" class="social"></i></a>
+					<a href="https://twitter.com/BadalSa38607542?t=6GjO6uAHJ89G4bLhRTmCQw&s=08"><i class="fa fa-twitter"><img src="twitter.png" class="social"></i></a>
+					<a href="https://www.linkedin.com/in/badal-sahoo-056b90220"><i class="fa fa-linkedin"><img src="linkedin.png" class="social"></i></a>
+					<a href="https://github.com/Badal712"><i class="fa fa-github"><img src="github.png" class="social"></i></a>
+
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

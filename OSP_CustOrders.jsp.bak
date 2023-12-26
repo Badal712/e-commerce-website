@@ -1,0 +1,57 @@
+<%@ page language="java" contentType="text/html" import="java.sql.*"%>
+<%!
+	Connection conn;
+	Statement stmt;
+	String ordNo, dt, mobNo, pass, Na, loc, ct, ctNum, mid, sNo, proC, proN, cat, pri, ordQ, amo;
+	
+	public void doConnect(){
+		
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(ClassNotFoundException cnfe){
+			System.out.println("Unable to show"+cnfe);
+		}
+		
+		try{
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ospdb","root","root");
+		}
+		catch(SQLException se){
+			System.out.println("Unable to show "+se);
+		}
+	}
+%>
+<%
+	ordNo = request.getParameter("txtOrdN");
+	dt = request.getParameter("dtDate");
+	mobNo = request.getParameter("txtMobN");
+	pass = request.getParameter("txtPass");
+	Na = request.getParameter("txtName");
+	loc = request.getParameter("txtLocal");
+	ct = request.getParameter("txtCt");
+	ctNum = request.getParameter("txtConNum");
+	mid = request.getParameter("txtMid");
+	sNo = request.getParameter("txtSln");
+	proC = request.getParameter("cmbProC");
+	proN = request.getParameter("txtProN");
+	cat = request.getParameter("txtCat");
+	pri = request.getParameter("txtPri");
+	ordQ = request.getParameter("txtOrdQ");
+	amo = request.getParameter("txtAmo");
+	doConnect();
+	
+	try{
+		stmt = conn.createStatement();
+		stmt.executeUpdate("insert into osp_tblcustorder value('"+ordNo+"','"+dt+"','"+mobNo+"','"+pass+"','"+Na+"','"+loc+"','"+ct+"','"+ctNum+"','"+mid+"','"+sNo+"','"+proC+"','"+cat+"','"+pri+"','"+ordQ+"','"+amo+"')");
+		
+		//Code for show alert
+					
+		out.println("<script type='text/javaScript'>");
+		out.println("alert("+"'Your data Saved Successfully...'"+");\n");
+		out.println("setTimeout(function(){window.location.href='OSP_CustOrderc.jsp'},10);");
+		out.println("</script>\n");
+	}
+	catch(SQLException se){
+		out.println("Unable to save your data "+se);
+	}
+%>

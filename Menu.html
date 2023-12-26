@@ -1,0 +1,177 @@
+<html>
+	<head>
+		<title>Home Page</title>
+		<link rel="stylesheet" href="menu.css">
+		<script src="main.js"></script>
+		<script language="javascript">
+			function showMast(sid){
+			
+				ssid=document.getElementById(sid);
+				ssid.src="submast.html";
+				
+			}
+			function showMang(sid){
+			
+				ssid=document.getElementById(sid);
+				ssid.src="submang.html";
+				
+			}
+			function showSR(sid){
+			
+				ssid=document.getElementById(sid);
+				ssid.src="subsr.html";
+				
+			}
+			function showDR(sid){
+			
+				ssid=document.getElementById(sid);
+				ssid.src="subdr.html";
+				
+			}
+		</script>
+	</head>
+	<body>
+		<section class="Contener">
+			<header>
+				<div class="logo-container">
+					<div class="logo">
+						<img src="OSS Logo cart.png" class="logo logoimg" alt="One Stop Shop Logo cart image">
+					</div>
+					<div class="logo">
+						<img src="OSS Logo name.png" class="logo logoname" alt="One Stop Shop name">
+					</div>
+				</div>
+				<div class="Heading">
+					<h1>Online Shopping Portal</h1>
+				</div>
+				<nav class="nav-tabs">
+					<ul>
+						<li><a href="#">Login</a></li>
+						<li><a href="#">Signup</a></li>
+					</ul>
+				</nav>
+			</header>
+			<nav class="Menu_tabs">
+				<ul>
+					<li><a href="About.html" id="menu">About</a></li>
+					<li><a href="#" id="menu" >Search</a></li>
+					<li><a href="reachus.html" id="menu">Reach Us</a></li>
+					<li id="mast"onclick="showMast('sub_menu1')">Master</li>
+					<li id="mast"onclick="showMang('sub_menu1')">Management</li>
+					<li id="mast"onclick="showSR('sub_menu1')">Summary Report</li>
+					<li id="mast"onclick="showDR('sub_menu1')">Details Report</a></li>
+				</ul>
+			</nav>
+			<nav class="sidebar">
+				<a href="#" class="logo">Dashboard</a>
+				<div class="menu-Content"> 
+					<ul class="menu-items">
+						<iframe width1="110" height="260" src=""  id="sub_menu1" >
+						WELCOME
+						</iframe>
+					</ul>
+					<ul class="menu-image">
+						
+					</ul>
+				</div>
+			</nav>
+			<div class="Img-slider">
+				<div class="slider">
+					<div class="slides">
+						<!-- Radio button start-->
+						<input type="radio" name="radio-btn" id="radio1">
+						<input type="radio" name="radio-btn" id="radio2">
+						<input type="radio" name="radio-btn" id="radio3">
+						<input type="radio" name="radio-btn" id="radio4">
+						<input type="radio" name="radio-btn" id="radio5">
+						<!-- Redio button end-->
+						<div class="slide first">
+							<img src="Slider3.jpg" alt="">
+						</div>
+						<div class="slide">
+							<img src="Slider4.jpg" alt="">
+						</div>
+						<div class="slide">
+							<img src="Slider5.jpg" alt="">
+						</div>
+						<div class="slide">
+							<img src="Slider6.jpg" alt="">
+						</div>
+						<div class="slide">
+							<img src="Slider7.jpg" alt="">
+						</div>
+						<!--Autometic navigation start-->
+						<div class="navigation-auto">
+							<div class="auto-btn1"></div>
+							<div class="auto-btn2"></div>
+							<div class="auto-btn3"></div>
+							<div class="auto-btn4"></div>
+							<div class="auto-btn5"></div>
+						</div>
+						<!--Autometic navigation end-->
+					</div>
+					<!--Manual Navigation Start-->
+					<div class="navigation-manual">
+						<label for="radio1" class="manual-btn"></label>
+						<label for="radio2" class="manual-btn"></label>
+						<label for="radio3" class="manual-btn"></label>
+						<label for="radio4" class="manual-btn"></label>
+						<label for="radio5" class="manual-btn"></label>
+					</div>
+					<!--Manual Navigation End-->
+				</div>
+			</div>
+			
+		<section>
+			<footer class="footer-distributed">
+				<div class="footer-left">
+					<img src="OSS Logo cart.png" class="logo logoimg" alt="One Stop Shop Logo cart image">
+					<p class="footer-links">
+						<a href="Menu.html" class="link-1">Home</a>
+						<a href="#">Blog</a>
+						<a href="#">Pricing</a>
+						<a href="About.html">About</a>
+						<a href="#">Faq</a>
+						<a href="reachus.html">Contact</a>
+					</p>
+					<p class="footer-company-name">&copy; One Stop Shop Mega Mart - 2023</p>
+				</div>
+				<div class="footer-center">
+					<div>
+						<i class="fa fa-map-marker"></i>
+						<p><span>Nayabazar</span> Cuttack, Odisha</p>
+					</div>
+					<div>
+						<i class="phone"></i>
+						<p>7978295957</p>
+					</div>
+					<div>
+						<i class="fa fa-envelope"></i>
+						<p><a href="mailto:od.badal07@gmail.com">od.badal07@gmail.com</a></p>
+					</div>
+				</div>
+				<div class="footer-right">
+					<p class="footer-company-about">
+						<span>About the company</span>
+						One Stop Shop is an exemplary online shopping portal that redefines the convenience of e-commerce by offering a comprehensive range of products and services all under one virtual roof.
+					</p>
+					<div class="footer-icons">
+						<a href="https://www.facebook.com/profile.php?id=100005385408616&sk=about"><i class="fa fa-facebook"><img src="facebook.png" class="social"></i></a>
+						<a href="https://twitter.com/BadalSa38607542?t=6GjO6uAHJ89G4bLhRTmCQw&s=08"><i class="fa fa-twitter"><img src="twitter.png" class="social"></i></a>
+						<a href="https://www.linkedin.com/in/badal-sahoo-056b90220"><i class="fa fa-linkedin"><img src="linkedin.png" class="social"></i></a>
+						<a href="https://github.com/Badal712"><i class="fa fa-github"><img src="github.png" class="social"></i></a>
+	
+					</div>
+				</div>
+		<script language="javascript">
+			var counter = 1;
+			setInterval(function(){
+				document.getElementById('radio' + counter).checked = true;
+				counter++;
+				if(counter > 5){
+					counter = 1;
+				}
+			}, 5000);
+		</script>
+	</body>
+</html>

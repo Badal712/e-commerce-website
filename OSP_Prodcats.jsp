@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html" import="java.sql.*" %>
+<html>
+	<head>
+		<title>Product Information</title>
+	</head>
+	<body>
+		<%!
+			Connection conn;
+			Statement stmt;
+			String productCC, productCN;
+			
+			public void doConnect() {
+				
+				try{
+					Class.forName("com.mysql.jdbc.Driver");
+				}
+				catch(ClassNotFoundException cnfe){
+					System.out.println("Unable to load driver "+cnfe);
+				}
+				
+				try{
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ospdb","root","root");
+				}
+				catch(SQLException se){
+					System.out.println("Unable to connect "+se);
+				}
+			}
+		%>
+		<%
+			productCC = request.getParameter("txtPCC");
+			productCN = request.getParameter("txtPCN");
+			doConnect();
+			
+			try{
+				stmt=conn.createStatement();
+				stmt.executeUpdate("insert into osp_tblprodcat value('"+productCC+"','"+productCN+"')");
+				
+				//Code for show alert
+				
+				out.println("<script type='text/javaScript'>");
+				out.println("alert("+"'Your Product Category Saved Successfully...'"+");\n");
+				out.println("setTimeout(function(){window.location.href='OSP_Prodcatc.html'},10);");
+				out.println("</script>\n");
+			}
+			catch(SQLException se){
+				out.println("Unable to save your data" +se);
+			}
+		%>
+	</body>
+</html>

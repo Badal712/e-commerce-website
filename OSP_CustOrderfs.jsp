@@ -1,0 +1,84 @@
+<%@ page language="java" contentType="text" import="java.sql.*" %>
+<%!
+	Connection conn;
+	Statement stmtUp, stmtDel,stmtStock;
+	String ordNo, dt, mob, pass, na, loc, ct, cn, mid, slNo, proC, proN, cat, pri, ordQ, amo, btnUp, btnDel;
+	String orsl[], orN ,sl;
+	//float oldiQ,newiQ;
+	public void doConnect(){
+		
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(ClassNotFoundException cnfe){
+			System.out.println("Unable to load driver "+cnfe);
+		}
+		
+		try{
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ospdb","root","root");
+		}
+		catch(SQLException se){
+			System.out.println("Unable to connect "+se);
+		}
+	}
+%>
+<html>
+	<head>
+		<title>Server Page</title>
+	</head>
+	<body>
+		<%
+			ordNo = request.getParameter("cmbOrdSl");
+			orsl=ordNo.split("-");
+			orN=orsl[0];
+			sl=orsl[1];
+			dt = request.getParameter("dtDate");
+			mob = request.getParameter("txtMobN");
+			pass = request.getParameter("txtPass");
+			na = request.getParameter("txtName");
+			loc = request.getParameter("txtLocal");
+			ct = request.getParameter("txtCt");
+			cn = request.getParameter("txtConNum");
+			mid = request.getParameter("txtMid");
+			slNo = request.getParameter("txtSln");
+			proC = request.getParameter("cmbProC");
+			proN = request.getParameter("txtProN");
+			cat = request.getParameter("txtCat");
+			pri = request.getParameter("txtPri");
+			ordQ = request.getParameter("txtOrdQ");
+			amo = request.getParameter("txtAmo");
+			btnUp = request.getParameter("btnUpd");
+			btnDel = request.getParameter("btnDel");
+			doConnect();
+			
+			try{
+				
+				if(btnUp != null){
+					stmtUp = conn.createStatement();
+					stmtUp.executeUpdate("update osp_tblcustorder set Order_Date='"+dt+"', Mobile_Number='"+mob+"', Password='"+pass+"', Name='"+na+"', Locality='"+loc+"', City='"+ct+"', Contant_Number='"+cn+"', E_Mail='"+mid+"', Product_Code='"+proC+"', Product_Name='"+proN+"', Category='"+cat+"', Price='"+pri+"', Order_Quantity='"+ordQ+"', Amount='"+amo+"' where Order_Number='"+orN+"' and Sl_No='"+sl+"'");
+					
+					//Code for show alert after data updated form database
+				
+					out.println("<script type='text/javaScript'>");
+					out.println("alert("+"'Your Data Update Successfully...'"+");\n");
+					out.println("setTimeout(function(){window.location.href='OSP_CustOrderfc.jsp'},10);");
+					out.println("</script>\n");
+				}
+				else if(btnDel != null){
+					stmtDel = conn.createStatement();
+					stmtDel.executeUpdate("delete from osp_tblcustorder where Order_Number='"+orN+"' and Sl_No='"+sl+"'");
+					
+					//Code for show alert after data delete form database
+				
+					out.println("<script type='text/javaScript'>");
+					out.println("alert("+"'Your Data Deleted Successfully...'"+");\n");
+					out.println("setTimeout(function(){window.location.href='OSP_CustOrderfc.jsp'},10);");
+					out.println("</script>\n");
+				}
+			}
+			catch(SQLException se){
+				out.println("Unable to Proceed..."+se);
+			}
+		%>
+	</body>
+</html>

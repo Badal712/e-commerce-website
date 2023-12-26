@@ -1,0 +1,61 @@
+<%@ page language="java" contentType="text/html" import="java.sql.*" %>
+<%!
+	Connection conn;
+	Statement stmtUp, stmtDel;
+	String proCC, proCN, btnup, btndel;
+	
+	public void doConnect(){
+		
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(ClassNotFoundException cnfe){
+			System.out.println("Unable load driver "+cnfe);
+		}
+		
+		try{
+			conn=DriverManager.getCnnection("jdbc:mysql://localhost:3306/ospdb","root","root");
+		}
+		catch(SQLException se){
+			System.out.println("Unable to Connect "+se);
+		}
+	}
+%>
+<html>
+	<head>
+		<title>Find Server Page</title>
+	</head>
+	<body>
+		<%
+			proCC = request.getParameter("cmbPCC");
+			proCN = request.getParameter("txtPCN");
+			btnup = request.getParameter("btnUpd");
+			btndel = request.getParameter("btnDel");
+			
+			try{
+				if(btnup != null){
+					stmtUp = conn.createStatement();
+					stmtUp.executeUpdate("update osp_tblprodcat set Product_Category_Name = '"+proCN+"' where Product_Category_ Code = '"+proCC+"'");
+					
+					//Code for show alert for update
+				
+					out.println("<script type='text/javaScript'>");
+					out.println("alert("+"'Your record update Successfully...'"+");\n");
+					out.println("setTimeout(function(){window.location.href='OSP_Prodcatc.html'},10);");
+					out.println("</script>\n");
+				}
+				else if(btndel != null){
+					stmtDel = conn.createStatement();
+					stmtDel.executeUpdate("delete from osp_tblprodcat where Product_Category_Code = '"+proCC+"'")
+					
+					//Code for show alert for delete
+				
+					out.println("<script type='text/javaScript'>");
+					out.println("alert("+"'One record deleted scucessfully...'"+");\n");
+					out.println("setTimeout(function(){window.location.href='OSP_Prodcatc.html'},10);");
+					out.println("</script>\n");
+				}
+			}
+		%>
+	</body>
+</html>

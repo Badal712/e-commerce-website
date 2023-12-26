@@ -1,0 +1,141 @@
+<%@ page language="java" contentType="text/html" import="java.sql.*" %>
+<%!
+	Connection conn;
+	Statement stmt, stmtArray;
+	ResultSet rsArray, rsPCC;
+	String productCC, productCN[];
+	int i;
+	
+	public void doConnect(){
+	
+		//Connecting to driver
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(ClassNotFoundException cnfe){
+			System.out.println("Unable to load Driver "+cnfe);
+		}
+		
+		//Connecting to database
+		try{
+			conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/ospdb","root","root");
+		}
+		catch(SQLException se){
+			System.out.println("Unable to Connect "+se);
+		}
+	}
+%>
+
+<%
+	productCN = new String[40];
+	doConnect();
+	
+	try{
+		stmtArray=conn.createStatement();
+		rsArray = stmtArray.executeQuery("select * from osp_tblproduct");
+		i = 0;
+		
+		while(rsArray.next()){
+			productCN[i] = rsArray.getString("Product_Category_Name");
+			i = i+1;
+		}
+	}
+	catch(SQLException sqle){
+		out.println("Array can not be filled "+sqle);
+	}
+%>
+<html>
+	<head>
+		<title>Find Page</title>
+		<link rel="stylesheet" href="design.css">
+		<script language="javascript">
+			function goBack() {
+				alert("welcome");
+				window.location = "OSP_Supplierc.html"
+			}
+			
+			function productCat(){
+				var  j;
+				var jProductCN;
+				
+				jProductCN = new Array();
+				j=0;
+				<%
+					i=0;
+					while(i<productCN.length){
+				%>
+						jProductCN[j] = "<%=productCN[i]%>";
+						j=j+1;
+				<%
+						i=i+1;
+					}
+				%>
+				k = document.f1.cmbPCC.selectedIndex;
+				document.f1.txtPCN.value=jProductCN[k-1];
+			}
+		</script>
+	</head>
+	<body>
+		<section class="Contener">
+			<header>
+				<div class="logo-container">
+					<div class="logo">
+						<img src="OSS Logo cart.png" class="logo logoimg" alt="One Stop Shop Logo cart image">
+					</div>
+					<div class="logo">
+						<img src="OSS Logo name.png" class="logo logoname" alt="One Stop Shop name">
+					</div>
+				</div>
+				<div class="Heading">
+					<h1>Online Shopping Portal</h1>
+				</div>
+				<nav class="nav-tabs">
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Login</a></li>
+						<li><a href="#">Signup</a></li>
+					</ul>
+				</nav>
+			</header>
+			<form name="f1" action="OSP_Productfs.jsp" method="post">
+				<div class="Main">
+					<h2>Organization Information</h2>
+					<div class="input_box">
+						<label class="lbl">Product Category Code :</label>
+						<select name="cmbPCC" class="tbox" onchange="productCat()">
+							<option value="">--select--</option>
+							<%
+								doConnect();
+								try{
+									stmt = conn.createStatement();
+									rsPCC = stmt.executeQuery("select * from osp_tblproduct");
+									
+									while(rsPCC.next()){
+										productCC = rsPCC.getString("Product_Category_Code");
+								
+							%>
+							<option value="<%=productCC%>"><%=productCC%></option>
+							<%
+									}
+								}
+								catch(SQLException se){
+									out.println("Unable to create"+se);
+								}
+							%>
+						</select>
+					</div>
+					<div class="input_box">
+						<label class="lbl">Product Categeory Name :</label>
+						<input type="text" name="txtPCN" class="tbox">
+					</div>
+					<input type="Submit" name="btnUpd" class="btn" value="Update">
+					<input type="Submit" name="btnDel" class="btn" value="Delete">
+					<input type="button" name="btnBack" class="btn" value="Back" onclick="goBack()">
+				</div>
+			</form>
+		</section>
+		<footer>
+			<p>&copy; One Stop Shop Mega Mart - 2023</p>
+		</footer>
+	</body>
+</html>

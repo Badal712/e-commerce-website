@@ -1,0 +1,194 @@
+/* Google Fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Bitter&family=Roboto+Slab:wght@600&display=swap');
+
+*{
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+}
+body{
+	min-height : 100vh;
+	display: flex;
+	background:url("background.jpg") ;
+    background-size:cover;
+	width: 100%;
+	
+}
+header{
+	position: fixed;
+	display: inline-flex;
+	width: 100%;
+	background-color:rgb(235, 94, 59);
+}
+img{
+	width: 70px;
+	position: relative;
+	left: 30px;
+}
+h1{
+	position:absolute;
+	left: 840px;
+	top: 10px;
+	font-family: 'Roboto Slab', serif;
+	font-size:1.5rem;
+    color:beige;
+}
+.Main{
+	position:relative;
+	top: 80px;
+	left:1000px;
+	max-width:700px;
+	width: 100%;
+    height:77%;
+	justify-content: center;
+	align-items: center;
+	background:rgba(255, 255, 255, 0.625);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+	padding: 25px; 
+    border-radius: 15px;
+    
+}
+h2{
+	text-align:center;
+	font-family: 'Merriweather', serif;
+	font-size:1.8rem;
+}
+
+.Contener .form {
+	margin-top: 30px;
+}
+.form > .main > .row  .input_box{
+	width: 100%;
+	margin-top:20px;
+}
+.input_box label {
+	color:rgb(34, 2, 62);
+	font-size: 1.2rem;
+	font-family: 'Bitter', serif;
+
+}
+.Contener .input_box input{
+	position: relative;
+	height: 30px;
+	width: 100%;
+	outline: none;
+	font-size: 1rem;
+	color:rgb(82, 81, 82);
+	margin-top: 8px;
+	border: 1px solid #767474;
+	border-radius: 8px;
+	padding:0 15px;
+}
+.Contener .input_box select{
+	position: relative;
+	height: 30px;
+	width: 100%;
+	outline: none;
+	font-size: 1rem;
+	color:rgb(82, 81, 81);
+	margin-top: 8px;
+	border: 1px solid #767474;
+	border-radius: 8px;
+	padding:0 15px;
+}
+.Contener .row{
+	display:flex;
+	column-gap: 15px;
+}
+.btn{
+	position: relative;
+	top:30px;
+	left: 150px;
+	background-color:rgb(151, 104, 237);
+	width: 120px;
+	padding: 10px;
+	border-radius:20px;
+	border:none;
+	text-align: center;
+	display: inline-block;
+	cursor: pointer;
+	transition: all 0.6s;
+	box-shadow: 0 2px 2px rgba(0,0,0.2);
+}
+.btn:hover{
+	background-color: rgb(17, 3, 75);
+	color: white;
+}
+footer{
+	position:absolute;
+	top: 875px;
+	max-width:100%;
+	width: 100%;
+	height: 80px;
+	text-align: center;
+	background-color:rgb(22, 19, 19) ;
+}
+footer > p{
+	position: relative;
+	top:30px;
+	color:azure;
+	font-size:1.2rem;
+}
+
+/*Responsive*/
+@media screen and (max-width: 800px){
+	body{
+		background-color: rgb(204, 226, 231);
+	}
+	header{
+		position: fixed;
+		display:flex;
+		width: 100%;
+		height:100px;
+		background-color:rgb(235, 94, 59);
+	}
+	img{
+		width: 100px;
+		position: absolute;
+		left: 15px;
+	}
+	h1{
+		position:absolute;
+		left: 150px;
+		top: 25px;
+		font-family: 'Kaushan Script', cursive;
+		font-size:1.5rem;
+	}
+	.Main{
+		position:static;
+		top: 140px;
+		left:20px;
+		margin-top: 150px;
+		max-width:700px;
+		width: 100%;
+		justify-content: center;
+		align-items: center;
+		background:rgb(204, 226, 231);
+		padding: 25px; 
+	}
+	h2{
+		text-align:center;
+		font-family: 'Merriweather', serif;
+		font-size:1.2rem;
+	}
+	.input_box label {
+		color:rgb(35, 2, 57);
+		font-size: 1rem;
+		font-family: 'Work Sans', sans-serif;
+	}
+	.Contener .input_box input{
+		position: static;
+	}
+	.form .row{
+		flex-wrap: wrap;
+	}
+	.btn{
+		position: relative;
+		left: 50px;
+	}
+	footer{
+		position:absolute;
+		top: 1050px;
+	}
+}

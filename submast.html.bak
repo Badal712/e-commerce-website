@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>Master</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body1{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        table1{
+            width:400px;
+        }
+        td{
+            padding-top: 10px;
+        }
+        a{
+            color:rgb(240, 237, 237);
+            font-size: 17;
+            text-decoration: none;
+			display:block;
+			padding: 1px 10px;
+    		line-height:40px;
+        }
+		a:hover{
+			background:blue;
+    		transition: 0.3s ease;
+		}
+		.fas{
+			position:absolute;
+			right:0;
+			margin:20px;
+			transition: 0.3s ease;
+		}
+    </style>
+</head>
+<body>
+	<table width="270">
+		<tr>
+			<td nowrap>
+				<a href="OSP_Orgnc.html" target="_blank">Organization Information <i class="fas fa-angle-right dropdown"></i></a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="OSP_Supplierc.html" target="_blank">Supplier Information <i class="fas fa-angle-right dropdown"></i></a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="OSP_Prodcatc.html" target="_blank">Product Category <i class="fas fa-angle-right dropdown"></i></a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="OSP_Productc.jsp" target="_blank">Product Information <i class="fas fa-angle-right dropdown"></i></a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="OSP_Retailer.jsp" target="_blank">Retailer Information <i class="fas fa-angle-right dropdown"></i></a>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

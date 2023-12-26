@@ -1,0 +1,60 @@
+<%@ page language="java" contentType="text/html" import="java.sql.*" %>
+<%!
+	Connection conn;
+	Statement stmtInsert;
+	String supName, supCo, proCat, proCC, proC, proName, unit, purPrice, mrp, taxSl, stock, upImg;
+	
+	public void doConnect(){
+		
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(ClassNotFoundException cnfe){
+			System.out.println("Unable to load driver "+cnfe);
+		}
+		
+		try{
+		conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/ospdb","root","root");
+		}
+		catch(SQLException se){
+			System.out.println("Unable to connect "+se);
+		}
+	}
+%>
+<html>
+	<head>
+		<title>Product Information</title>
+	</head>
+	<body>
+		<%
+			supName = request.getParameter("cmbSupName");
+			supCo = request.getParameter("txtSupCode");
+			proCat = request.getParameter("cmbProCat");
+			proCC = request.getParameter("txtPCC");
+			proC = request.getParameter("txtProdCode");
+			proName = request.getParameter("txtProdName");
+			unit = request.getParameter("txtUnit");
+			purPrice = request.getParameter("txtPurPrice");
+			mrp = request.getParameter("txtMRP");
+			taxSl = request.getParameter("cmbTaxslab");
+			stock = request.getParameter("txtStock");
+			upImg = request.getParameter("fileImage");
+			doConnect();
+			
+			try{
+				stmtInsert=conn.createStatement();
+				stmtInsert.executeUpdate("insert into osp_tblproduct value('"+supName+"','"+supCo+"','"+proCat+"','"+proCC+"','"+proC+"','"+proName+"','"+unit+"','"+purPrice+"','"+mrp+"','"+taxSl+"','"+stock+"','"+upImg+"')");
+				
+				//Code for show alert
+				
+				out.println("<script type='text/javaScript'>");
+				out.println("alert("+"'Your Product Category Saved Successfully...'"+");\n");
+				out.println("setTimeout(function(){window.location.href='OSP_Prodcatc.jsp'},10);");
+				out.println("</script>\n");
+			}
+			catch(SQLException sqle){
+				out.println("Unable to save your data" +sqle);
+			}
+		%>
+	</body>
+</html>

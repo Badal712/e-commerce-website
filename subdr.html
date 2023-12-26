@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="subdrcs.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="side-bar">
+		<div class="menu">
+			<div class="item">
+				<a class="sub-btn"> <i class="fas fa-table"></i>Product Information <i class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="OSP_ReportProductCatgc.jsp" target="_blank" class="sub-item">Category</a>
+					<a href="OSP_ReportProductSuppc.jsp" class="sub-item">Supplier Name</a>
+				</div>
+			</div>
+			<div class="item">
+				<a class="sub-btn"> <i class="fas fa-table"></i>Supplier/Company Requisition <i class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="OSP_ReportSuppreqReqnc.jsp" target="_blank" class="sub-item">Requisition Number</a>
+					<a href="OSP_ReportSuppreqSupNc.jsp" target="_blank" class="sub-item">Supplier Name</a>
+					<a href="OSP_ReportSuppreqProdIDc.jsp" target="_blank" class="sub-item">Product Code</a>
+				</div>
+			</div>
+			<div class="item">
+				<a class="sub-btn"> <i class="fas fa-table"></i>Retailer Requisition <i class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="OSP_ReportRetreqReqNc.jsp" target="_blank" class="sub-item">Requisition Number</a>
+					<a href="OSP_ReportRetreqSupNc.jsp" target="_blank" class="sub-item">Retailer Name</a>
+					<a href="OSP_ReportRetreqProCc.jsp" target="_blank" class="sub-item">Product Code</a>
+				</div>
+			</div>
+			<div class="item">
+				<a class="sub-btn"> <i class="fas fa-table"></i>Issue to Retailer <i class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="OSP_ReportIssueToRetInvNc.jsp" target="_blank" class="sub-item">Invoice Number</a>
+					<a href="OSP_ReportIssueToRetDatec.jsp" target="_blank" class="sub-item">Invoice Date</a>
+					<a href="OSP_ReportIssueToRetRetNc.jsp" target="_blank" class="sub-item">Retailer Name</a>
+					<a href="OSP_ReportIssueToRetProCc.jsp" target="_blank" class="sub-item">Product Code</a>
+				</div>
+			</div>
+			<div class="item">
+				<a class="sub-btn"> <i class="fas fa-table"></i>Customer Order <i class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="OSP_ReportCustOrderMobc.jsp" target="_blank" class="sub-item">Mobile Number</a>
+					<a href="OSP_ReportCustOrderProc.jsp" target="_blank" class="sub-item">Product Code</a>
+				</div>
+			</div>
+			<div class="item">
+				<a class="sub-btn"> <i class="fas fa-table"></i>Issue to Customer <i class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="OSP_ReportU=IssueToCustDtc.jsp" target="_blank" class="sub-item">Date</a>
+					<a href="OSP_ReportIssueToCustMobc.jsp" target="_blank" class="sub-item">Mobile Number</a>
+					<a href="OSP_ReportIssueToCustProCc.jsp" target="_blank" class="sub-item">Product Code</a>
+				</div>
+			</div>
+			<div class="item">
+				<a class="sub-btn"> <i class="fas fa-table"></i>Payment Vaucher <i class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="OSP_ReportPaymentVouSupNc.jsp" target="_blank" class="sub-item">Supplier Name</a>
+				</div>
+			</div>
+			<div class="item">
+				<a class="sub-btn"> <i class="fas fa-table"></i>Receipt Voucher <i class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="OSP_ReportReceiptVouRetNc.jsp" target="_blank" class="sub-item">Retailer Name</a>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function(){
+			$('.sub-btn').click(function(){
+				$(this).next('.sub-menu').slideToggle();
+				$(this).find('.dropdown').toggleClass('rotate');
+			})
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html" import="java.sql.*"%>
+<html>
+	<head>
+		<head>Product Information</head>
+	</head>
+	<body>
+		<section class="Contener">
+			<header>
+				<div class="logo-container">
+					<div class="logo">
+						<img src="OSS Logo cart.png" class="logo logoimg" alt="One Stop Shop Logo cart image">
+					</div>
+					<div class="logo">
+						<img src="OSS Logo name.png" class="logo logoname" alt="One Stop Shop name">
+					</div>
+				</div>
+				<div class="Heading">
+					<h1>Online Shopping Portal</h1>
+				</div>
+				<nav class="nav-tabs">
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Login</a></li>
+						<li><a href="#">Signup</a></li>
+					</ul>
+				</nav>
+			</header>
+			<form name="f1" class="form" action="OSP_ProductInfos.jsp" method="post">
+				<div class="Main">
+					<div class="Dis">
+						<div class="input_box">
+							<label class="lbl">Supplier Name :</label>
+							<select class="tbox" name="cmbSupName" onchange="">
+								<option value="">--select--</option>
+								
+							</select>
+						</div>
+						<div class="input_box">
+							<label class="lbl">Supplier Code :</label>
+							<input type="text" name="txtSupCode" class="tbox">
+						</div>
+						<div class="input_box">
+							<label class="lbl">Product Category</label>
+							<select class="tbox" name="cmbProCat" onchange="">
+								<option value="">--select--</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</form>
+		</section>
+	</body>
+</html>

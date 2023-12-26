@@ -1,0 +1,56 @@
+<html>
+	<head>
+		<title>Product Category</title>
+		<link rel="stylesheet" href="mystyle.css">
+	</head>
+	<body>
+		<section class="Contener">
+			<header>
+				<div class="logo-container">
+					<div class="logo">
+						<img src="OSS Logo cart.png" class="logo logoimg" alt="One Stop Shop Logo cart image">
+					</div>
+					<div class="logo">
+						<img src="OSS Logo name.png" class="logo logoname" alt="One Stop Shop name">
+					</div>
+				</div>
+				<div class="Heading">
+					<h1>Online Shopping Portal</h1>
+				</div>
+				<nav class="nav-tabs">
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Login</a></li>
+						<li><a href="#">Signup</a></li>
+					</ul>
+				</nav>
+			</header>
+			<form class="form" action="OSP_Prodcats.jsp" method="post">
+				<h2>Product Category</h2>
+				<div class="Main">
+					<div class="box">
+						<div class="input_box">
+							<label class="lbl">Product Category Code :</label>
+							<input type="text" name="txtPCC" class="tbox">
+						</div>
+						<div class="input_box">
+							<label class="lbl">Product Category Name :</label>
+							<input type="text" name="txtPCN" class="tbox">
+						</div>
+						<input type="submit" name="btnSub" class="btn" value="Submit">
+						<input type="button" name="btnFind" class="btn" onclick="goFind()" value="Find">
+						<input type="reset" name="btnRes" class="btn" value="Reset">
+					</div>
+				</div>
+			</form>
+		</section>
+		<footer>
+			<p>&copy; One Stop Shop Mega Mart - 2023</p>
+		</footer>
+		<script language="javascript">
+			function goFind(){
+				window.location = "OSP_Prodcatfc.jsp"
+			}
+		</script>
+	</body>
+</html>
